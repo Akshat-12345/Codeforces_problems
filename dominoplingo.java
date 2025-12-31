@@ -10,5 +10,6 @@ public class dominoplingo {
         int ans = total/2;
 
         System.out.println(ans);
+        sc.close();
     }
 }
