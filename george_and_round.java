@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class main {
+public class george_and_round {
 
     public static int solve(int [] arr, int [] george){
         Arrays.sort(arr);
