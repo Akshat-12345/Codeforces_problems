@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class main {
+public class I_wanna_Be_Guy469A {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -31,6 +31,7 @@ public class main {
         }else{
             System.out.println("Oh, my keyboard!");
         }
-
+        
+        sc.close();
     }
 }
