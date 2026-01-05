@@ -25,6 +25,6 @@ public class football {
             System.out.println("NO");
         }
         
-
+        sc.close();
     }
 }

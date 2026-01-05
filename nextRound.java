@@ -20,6 +20,7 @@ public class nextRound{
         }
 
         System.out.println(ans);
+        sc.close();
 
     }
 }

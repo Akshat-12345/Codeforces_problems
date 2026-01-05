@@ -10,6 +10,8 @@ public class wordManipulation {
              String str = first + "" + s.substring(1);
              System.out.println(str);
         }
+
+        sc.close();
         
 
     }

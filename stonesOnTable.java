@@ -14,6 +14,6 @@ public class stonesOnTable {
         }
         
         System.out.println(count);
-
+        sc.close();
     }
 }

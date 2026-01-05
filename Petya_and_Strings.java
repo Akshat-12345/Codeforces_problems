@@ -32,6 +32,7 @@ public class Petya_and_Strings {
         int m = check(s1, s2);
 
         System.out.println(m);
+        sc.close();
 
     }
 }

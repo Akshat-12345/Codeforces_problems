@@ -39,5 +39,6 @@ public class Queue_in_the_school {
         solve(arr,t);
 
         System.out.println(arr);
+        sc.close();
     }
 }

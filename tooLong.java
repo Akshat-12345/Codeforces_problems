@@ -22,6 +22,8 @@ public class tooLong{
             }else{
                 System.out.println(str);
             }
+
+            sc.close();
         }
 
     }

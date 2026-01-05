@@ -18,5 +18,6 @@ public class team {
         }
 
         System.out.println(solution);
+        sc.close();
     }
 }

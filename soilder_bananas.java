@@ -16,6 +16,7 @@ public class soilder_bananas {
         }else{
             System.out.println(remaining_dollar);
         }
+        sc.close();
         
     }
 }

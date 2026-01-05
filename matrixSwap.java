@@ -27,6 +27,6 @@ public class matrixSwap {
         int total = rowSwap + colSwap;
         
         System.out.println(total);
-
+        sc.close();
     }
 }

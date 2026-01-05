@@ -45,6 +45,6 @@ public class george_and_round {
         int total = solve(arr,george);
         
         System.out.println(total);
-        
+        sc.close();
     }
 }

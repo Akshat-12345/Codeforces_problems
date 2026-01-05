@@ -18,5 +18,6 @@ public class helpfulMath {
         }
 
         System.out.println(str);
+        sc.close();
     }
 }

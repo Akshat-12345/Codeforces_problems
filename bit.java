@@ -18,5 +18,7 @@ public class bit{
            }
         }
         System.out.println(X);
+
+        sc.close();
     }
 }
