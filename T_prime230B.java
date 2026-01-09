@@ -40,7 +40,7 @@ public class T_prime230B {
         for(int  i = 0; i< n ; i++){
             arr[i] = sc.nextLong();
         }
-        int count = 0;
+        
         for(int i = 0 ; i< n ;i++ ){
             long x = (long)Math.sqrt(arr[i]);
             if(isPrime(x) && x*x == arr[i]){
@@ -49,5 +49,7 @@ public class T_prime230B {
                 System.out.println("NO");
             }
         }
+
+        sc.close();
     }
 }
