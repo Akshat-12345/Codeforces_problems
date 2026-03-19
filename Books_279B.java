@@ -39,5 +39,7 @@ public class Books_279B {
         int len = solve(t,arr);
 
         System.out.println(len);
+
+        sc.close();
     }
 }

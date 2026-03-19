@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshat · clean cards · light blue spots · no border</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f7ff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        /* main canvas - outer border completely removed */
+        .roadmap-canvas {
+            position: relative;
+            width: 100%;
+            max-width: 1500px;
+            min-height: 1000px;
+            background: transparent;  /* changed from rgba to transparent */
+            backdrop-filter: none;     /* removed blur effect from container */
+            border-radius: 70px 30px 70px 30px;
+            box-shadow: none;          /* removed shadow */
+            overflow: hidden;
+            border: none;              /* explicitly no border */
+        }
+
+        /* LIGHT BLUE SPOTS ONLY */
+        .light-spot {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(140, 210, 255, 0.2);
+            filter: blur(60px);
+            z-index: 1;
+        }
+        .spot1 { width: 500px; height: 500px; top: -150px; left: -80px; }
+        .spot2 { width: 600px; height: 600px; bottom: -200px; right: -100px; }
+        .spot3 { width: 450px; height: 450px; top: 30%; left: 20%; }
+        .spot4 { width: 550px; height: 550px; bottom: 15%; right: 10%; }
+        .spot5 { width: 400px; height: 400px; top: 60%; left: 5%; }
+        .spot6 { width: 500px; height: 500px; top: 10%; right: 5%; }
+
+        /* CONTENT GRID – 2 columns, 2 rows */
+        .card-grid {
+            position: relative;
+            z-index: 30;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 40px 60px;
+            width: 100%;
+            height: 100%;
+            min-height: 1000px;
+            padding: 70px 80px;
+        }
+
+        /* card styles – rounded, frosted */
+        .grid-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(0, 68, 204, 0.2);
+            border-radius: 70px 30px 70px 30px;
+            padding: 40px 42px;
+            box-shadow: 0 30px 45px -30px rgba(0,68,204,0.3);
+            transition: 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-card:hover {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(0, 68, 204, 0.4);
+            transform: scale(1.01) translateY(-3px);
+        }
+
+        /* subtle rotations */
+        .card-1 { transform: rotate(-0.7deg) translateX(-5px); }
+        .card-2 { transform: rotate(0.9deg) translateX(12px) translateY(8px); }
+        .card-3 { transform: rotate(0.4deg) translateY(-7px) translateX(-10px); }
+        .card-4 { transform: rotate(-0.5deg) translateX(8px) translateY(-5px); }
+
+        /* typography */
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0044CC;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .card-text {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: #132541;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 18px;
+            padding-left: 36px;
+            position: relative;
+            font-size: 1.2rem;
+            color: #1b2e4e;
+        }
+        .bullet-list li::before {
+            content: "◈";
+            color: #0044CC;
+            font-size: 2rem;
+            position: absolute;
+            left: 0;
+            top: -10px;
+            opacity: 0.9;
+        }
+
+        .pill-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .pill {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #003399;
+            border: 1px solid rgba(0, 68, 204, 0.2);
+            box-shadow: 0 6px 12px -8px rgba(0,68,204,0.2);
+        }
+
+        .accent-badge {
+            display: inline-block;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-size: 1.25rem;
+            border: 1px solid rgba(0, 68, 204, 0.2);
+            color: #0e1c3a;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        strong {
+            color: #0044CC;
+            font-weight: 700;
+        }
+
+        /* grid placement */
+        .card-1 { grid-column: 1; grid-row: 1; }
+        .card-2 { grid-column: 2; grid-row: 1; }
+        .card-3 { grid-column: 1; grid-row: 2; }
+        .card-4 { grid-column: 2; grid-row: 2; }
+    </style>
+</head>
+<body>
+    <div class="roadmap-canvas">
+        <!-- only light blue spots - road completely removed -->
+        <div class="light-spot spot1"></div>
+        <div class="light-spot spot2"></div>
+        <div class="light-spot spot3"></div>
+        <div class="light-spot spot4"></div>
+        <div class="light-spot spot5"></div>
+        <div class="light-spot spot6"></div>
+
+        <!-- CARD GRID – 4 cards -->
+        <div class="card-grid">
+            <!-- CARD 1 (top left) - Domain of interest -->
+            <div class="grid-card card-1">
+                <div class="card-title">Domain of interest</div>
+                <ul class="bullet-list">
+                    <li><strong>MERN Stack</strong> – full cycle development</li>
+                    <li><strong>Backend Optimization</strong> & MongoDB</li>
+                    <li><strong>RESTful API</strong> architecture & integration</li>
+                    <li><strong>AWS Cloud</strong> deployment & scaling</li>
+                </ul>
+                <div class="pill-wrap">
+                    <span class="pill">MERN</span>
+                    <span class="pill">Node.js</span>
+                    <span class="pill">MongoDB</span>
+                    <span class="pill">AWS</span>
+                </div>
+            </div>
+
+            <!-- CARD 2 (top right) - Long term goals -->
+            <div class="grid-card card-2">
+                <div class="card-title">Long term goals</div>
+                <div class="card-text">
+                    Become a specialized <strong>Full Stack MERN Architect</strong>. Design <strong>scalable, high‑performance</strong> web infrastructures. Lead engineering teams to build <strong>production‑grade solutions</strong> with modern JavaScript.
+                </div>
+                <div class="pill-wrap" style="margin-top:30px;">
+                    <span class="pill">Architect</span>
+                    <span class="pill">Tech Lead</span>
+                    <span class="pill">Scalability</span>
+                </div>
+            </div>
+
+            <!-- CARD 3 (bottom left) - Why this path? -->
+            <div class="grid-card card-3">
+                <div class="card-title">Why this path?</div>
+                <ul class="bullet-list">
+                    <li>Passion for building <strong>seamless user experiences</strong></li>
+                    <li>Driven to solve complex <strong>backend logic</strong> challenges</li>
+                    <li>Build secure, <strong>responsive platforms</strong> like Airbnb</li>
+                    <li>Architect <strong>scalable systems</strong> that impact millions</li>
+                </ul>
+                <div class="accent-badge">⚡ build · scale · innovate</div>
+            </div>
+
+            <!-- CARD 4 (bottom right) - Roadmap -->
+            <div class="grid-card card-4">
+                <div class="card-title">Roadmap to achieve it</div>
+                <ul class="bullet-list">
+                    <li>Master <strong>Advanced React</strong> (Redux, Hooks, Suspense)</li>
+                    <li><strong>System Design</strong> for large‑scale applications</li>
+                    <li><strong>Node.js Microservices</strong> & streams</li>
+                    <li><strong>AWS Cloud Native</strong> (Lambda, ECS, Kubernetes)</li>
+                    <li>Container orchestration with <strong>K8s</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

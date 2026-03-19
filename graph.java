@@ -37,6 +37,7 @@ public class graph {
             arr.get(from).add(to);
             arr.get(to).add(from);
         }
-
+        
+        sc.close();
     }
 }

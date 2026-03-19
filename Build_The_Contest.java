@@ -82,5 +82,6 @@ public class Build_The_Contest {
         String s = solve(n,arr);
 
         System.out.println(s);
+        sc.close();
     }
 }

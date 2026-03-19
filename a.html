@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshat Bajpai · Final Slide</title>
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eef2f6;
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: #0e1c3a;
+        }
+
+        /* Canvas dimensions */
+        .pattern-canvas {
+            position: relative;
+            width: 1400px;
+            min-height: 900px; /* High height to prevent shrinking */
+            background: #ffffff;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            padding: 70px 60px;
+            display: grid;
+            grid-template-columns: 32% 63%;
+            gap: 5%;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        /* Blobs */
+        .pattern-shape {
+            position: absolute;
+            background: rgba(173, 204, 255, 0.2);
+            backdrop-filter: blur(2px);
+            border-radius: 60% 40% 50% 30% / 40% 50% 60% 40%;
+            border: 1px solid rgba(173, 200, 255, 0.3);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ---- LEFT SIDE ---- */
+        .left {
+            position: relative;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .name-group { margin-bottom: 20px; }
+        
+        .name {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            font-size: 5.2rem;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: #091839;
+            margin-bottom: 12px;
+        }
+        .name span { color: #0044CC; }
+
+        .subhead {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #2a4070;
+            margin-left: 6px;
+        }
+
+        /* Education */
+        .edu-group {
+            margin-top: 40px;
+            padding-left: 6px;
+        }
+        
+        /* Unified Header Style (No lines) */
+        .label-soft {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0044CC;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            display: block; /* Ensures it sits on its own line */
+        }
+
+        .degree {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0e1e3b;
+            line-height: 1.1;
+        }
+        .college {
+            font-size: 1.4rem;
+            color: #2f4672;
+            margin: 8px 0;
+            font-weight: 400;
+        }
+        .cgpa {
+            font-weight: 600;
+            color: #0044CC;
+            font-size: 1.2rem;
+        }
+
+        /* Contact */
+        .contact {
+            font-size: 1.05rem;
+            color: #2f4a7a;
+            line-height: 2.0;
+            padding-left: 6px;
+        }
+        .contact span {
+            background: rgba(0, 68, 204, 0.04);
+            padding: 5px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            border: 1px solid rgba(173,200,255,0.4);
+            font-weight: 500;
+        }
+
+        /* ---- RIGHT SIDE ---- */
+        .right {
+            position: relative;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 35px; /* Consistent gap between sections */
+            justify-content: center;
+        }
+
+        /* 1. Skills */
+        .skill-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .pill-clear {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #003d9e;
+            border: 1px solid rgba(120, 170, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0,68,204,0.03);
+        }
+
+        /* 2. Strengths (Added back separately) */
+        .strength-grid {
+            display: flex;
+            flex-direction: column; /* Stacked list */
+            gap: 12px;
+        }
+        .strength-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #132541;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px 20px 8px 10px;
+            border-radius: 50px;
+            border: 1px solid rgba(150, 190, 255, 0.3);
+            width: fit-content;
+        }
+        .strength-mark { color: #0044CC; font-size: 1.4rem; }
+
+        /* 3. Interests */
+        .interest-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #1b3157;
+            background: rgba(255,255,255,0.5);
+            padding: 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(130, 180, 255, 0.3);
+        }
+        .interest-paragraph b { color: #0044CC; }
+
+        /* 4. Projects */
+        .project-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .project-frost {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(140, 190, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .proj-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #0044CC;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .proj-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #11203f;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .proj-desc {
+            color: #2b4570;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: auto;
+        }
+
+        /* Patterns */
+        .pattern-1 { top: -2%; left: -2%; width: 450px; height: 350px; opacity: 0.5; }
+        .pattern-2 { bottom: 5%; left: 20%; width: 300px; height: 300px; opacity: 0.4; }
+        .pattern-3 { top: 5%; right: -2%; width: 500px; height: 400px; opacity: 0.5; }
+        .pattern-6 { bottom: -5%; right: 10%; width: 400px; height: 300px; opacity: 0.3; }
+
+        .left, .right, .pill-clear, .strength-row, .interest-paragraph, .project-frost {
+            position: relative;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="pattern-canvas">
+        <div class="pattern-shape pattern-1"></div>
+        <div class="pattern-shape pattern-2"></div>
+        <div class="pattern-shape pattern-3"></div>
+        <div class="pattern-shape pattern-6"></div>
+
+        <div class="left">
+            <div>
+                <div class="name-group">
+                    <div class="name">Akshat<br><span>Bajpai</span></div>
+                    <div class="subhead">Full Stack Engineer</div>
+                </div>
+
+                <div class="edu-group">
+                    <div class="label-soft">education</div>
+                    <div class="degree">B.Tech CSE</div>
+                    <div class="college">Galgotias University</div>
+                    <div class="cgpa">2023 – 2027 | CGPA: 8.94</div>
+                </div>
+            </div>
+
+            <div class="contact">
+                <span>akshatbajpai2020@gmail.com</span><br>
+                <div style="height: 8px;"></div>
+                <span>Greater Noida</span> · <span>+91 7991780850</span>
+            </div>
+        </div>
+
+        <div class="right">
+            
+            <div>
+                <div class="label-soft">technical skills</div>
+                <div class="skill-cluster">
+                    <span class="pill-clear">Java (DSA)</span>
+                    <span class="pill-clear">MERN stack</span>
+                    <span class="pill-clear">AWS cloud</span>
+                    <span class="pill-clear">Bootstrap</span>
+                    <span class="pill-clear">Python</span>
+                    <span class="pill-clear">Postman</span>
+                    <span class="pill-clear">Git/GitHub</span>
+                    <span class="pill-clear">Docker</span>
+                    <span class="pill-clear">SQL</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="label-soft">strengths</div>
+                <div class="strength-grid">
+                    <div class="strength-row"><span class="strength-mark">◈</span> <strong>DSA Expert</strong> – 400+ problems solved</div>
+                    <div class="strength-row"><span class="strength-mark">◈</span> <strong>Problem Solver</strong> – Critical Thinking & Problem Solving</div>
+                    <div class="strength-row"><span class="strength-mark">◈</span> <strong>Production Ready</strong> – Scalable Apps</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="label-soft">interests</div>
+                <div class="interest-paragraph">
+                    Passionate about <b>MERN Stack</b>, <b>Backend Developer</b> & <b>Problem Solving</b>. Outside of tech: competitive <b>Swimmer</b> (Silver Medalist).
+                </div>
+            </div>
+
+            <div>
+                <div class="label-soft">engineering projects</div>
+                <div class="project-row">
+                    <div class="project-frost">
+                        <span class="proj-tag">MERN + AWS</span>
+                        <div class="proj-title">Airbnb clone</div>
+                        <div class="proj-desc">Full-stack property listing, bookings, Passport JS, Cloudinary, AWS deployment.</div>
+                    </div>
+                    <div class="project-frost">
+                        <span class="proj-tag">Python + NLP</span>
+                        <div class="proj-title">Dhvani AI</div>
+                        <div class="proj-desc">Voice assistant for desktop automation, weather/search, TTS, real-time adaptive.</div>
+                    </div>
+                    <div class="project-frost">
+                        <span class="proj-tag">Cybersecurity</span>
+                        <div class="proj-title">Steganography</div>
+                        <div class="proj-desc">IBM internship suite · hide sensitive data in media · encryption layer.</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>
+
